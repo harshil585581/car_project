@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font Awesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Custom CSS File Link -->
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+
+    <title>Sudeeksha Cars</title>
+
+    <script>
+        function loginp(){
+            window.location.href = 'login.html';
+        }
+
+        function register(){
+            window.location.href = 'register.html';
+        }
+    </script>
+
+</head>
+<body>
+    
+<header class="header">
+    <div id="menu-btn" class="fas fa-bars"></div>
+    <a href="#" class="logo"> <span>Sudeeksha</span>Cars </a>
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#vehicles">vehicles</a>
+        <a href="#services">services</a>
+        <a href="#featured">featured</a>
+        <a href="#reviews">reviews</a>
+        <a href="#contact">contact</a>
+    </nav>
+    <div id="login-btn">
+        <button class="btn" onclick="loginp()">login</button>
+        <button class="btn" onclick="register()">Register</button>
+    </div>
+</header>
+
+
+<section class="home" id="home">
+    <h3>find your car</h3>
+    <img src="{% static '/img/home_home-img.png' %}" alt="Find your car">
+    <a href="#" class="btn">explore cars</a>
+</section>
+
+<section class="icons-container">
+    <div class="icons">
+        <i class="fas fa-home"></i>
+        <div class="content">
+            <h3>15</h3>
+            <p>branches</p>
+        </div>
+    </div>
+    <div class="icons">
+        <i class="fas fa-car"></i>
+        <div class="content">
+            <h3>350+</h3>
+            <p>cars sold</p>
+        </div>
+    </div>
+    <div class="icons">
+        <i class="fas fa-users"></i>
+        <div class="content">
+            <h3>350+</h3>
+            <p>happy clients</p>
+        </div>
+    </div>
+    <div class="icons">
+        <i class="fas fa-car"></i>
+        <div class="content">
+            <h3>700+</h3>
+            <p>new cars</p>
+        </div>
+    </div>
+</section>
+
+<section class="services" id="services">
+    <h1 class="heading"> Our <span>services</span> </h1>
+    <div class="box-services">
+        <div class="box">
+            <i class="fas fa-car"></i>
+            <h3>car selling</h3>
+            <p>Sells the car at best price compared to others in the market</p>
+            <a href="#" class="btn"> read more</a>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-headset"></i>
+            <h3>24/7 support</h3>
+            <p>24/7 Assistance </p>
+            <a href="#" class="btn"> read more</a>
+        </div>
+    </div>
+</section>
+
+
+<section class="featured" id="featured">
+    <h1 class="heading"> <span>Featured</span> cars </h1>
+    <div class="featured-slider">
+        <div class="featured-slide">
+            <img src="{% static '/img/home_car-1.png' %}" alt="Car Model 1">
+            <div class="content">
+                <h3>Mercedez</h3>
+                <div class="price">Rs 9,000,000/-</div>
+                <a href="#" class="btn">check out</a>
+            </div>
+        </div>
+        <div class="featured-slide">
+            <img src="{% static '/img/home_car-2.png' %}" alt="Car Model 2">
+            <div class="content">
+                <h3>MG Hector</h3>
+                <div class="price">Rs 200,000/-</div>
+                <a href="#" class="btn">check out</a>
+            </div>
+        </div>
+        <div class="featured-slide">
+            <img src="{% static '/img/home_car-3.png' %}" alt="Car Model 3">
+            <div class="content">
+                <h3>Fiat Avventura</h3>
+                <div class="price">Rs 1,100,000/-</div>
+                <a href="#" class="btn">check out</a>
+            </div>
+        </div>
+        <div class="featured-slide">
+            <img src="{% static '/img/home_car-4.png' %}" alt="Car Model 4">
+            <div class="content">
+                <h3>Audi Q7</h3>
+                <div class="price">Rs 11,000,000/-</div>
+                <a href="#" class="btn">check out</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter">
+    <h3>Subscribe for latest updates</h3>
+    <p>Subscribe here to get updates about cars,&nbsp;prices.</p>
+    <form action="#">
+        <input type="email" placeholder="Enter your email">
+        <input type="submit" value="Subscribe">
+    </form>
+</section>
+
+<section class="reviews" id="reviews">
+    <h1 class="heading"> Client's <span>review</span> </h1>
+    <div class="review-slider">
+        <div class="review-slide">
+            <img src="{% static '/img/home_pic-1.png' %}" alt="Client 1">
+            <div class="content">
+                <p>Required the car urgently so I went to showroom and got the car without much hassel at best price .</p>
+                <h3>Abhishek</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-slide">
+            <img src="{% static '/img/home_pic-3.png' %}" alt="Client 1">
+            <div class="content">
+                <p>I was quite impressed with the way the staff helped me during all process of purchasing this vehicle.
+                     They provided their 24 x 7 support for this . Truly greatful </p>
+                <h3>Bhavesh</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-slide">
+            <img src="{% static '/img/home_pic-1.png' %}" alt="Client 1">
+            <div class="content">
+                <p>Great support provided by the team making the complete process hassle free. All calls/queries answered promptly.
+                    Really happy with the services and appreciate the knowledge.</p>
+                <h3>Krishna Kanth</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <h1 class="heading"><span>contact</span> us</h1>
+    <div class="row">
+        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15584.788104761176!2d77.57131879999999!3d12.9240298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15831cbbb4d1%3A0x22b569d50f0148f2!2s2242%2C%2023rd%20Cross%20Rd%2C%20Karesandra%2C%20Banashankari%20Stage%20II%2C%20Banashankari%2C%20Bengaluru%2C%20Karnataka%20560070!5e0!3m2!1sen!2sin!4v1632137920043!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+        <form action="#">
+            <h3>Get in touch</h3>
+            <input type="text" placeholder="Your name" class="box">
+            <input type="email" placeholder="Your email" class="box">
+            <input type="tel" placeholder="Subject" class="box">
+            <textarea placeholder="Your message" class="box" cols="30" rows="10"></textarea>
+            <input type="submit" value="send message" class="btn">
+        </form>
+    </div>
+</section>
+
+<footer class="footer" id="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>our branches</h3>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Bangalore </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Hyderabad </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Chennai </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Mumbai </a>
+        </div>
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> vehicles </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> services </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> featured </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> reviews </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> contact </a>
+        </div>
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> example@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> 123 Street, City, Country </a>
+        </div>
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-linkedin-in"></i> linkedin </a>
+            <a href="#"> <i class="fab fa-youtube"></i> youtube </a>
+        </div>
+    </div>
+    <div class="credit"> &copy; 2024 Sudeeksha. All rights reserved. </div>
+</footer>
+
+</body>
+</html>
