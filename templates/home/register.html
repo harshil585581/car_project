@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="{% static '/css/register.css' %}">
+
+    <script>
+        function login() {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+
+<body>
+    <div class="super">
+        <nav class="na">
+            <marquee behavior="" direction="">
+                <h1><span>Sudeeksha</span> Cars</h1>
+            </marquee>
+        </nav>
+
+        <div class="cont">
+            <div class="reg-container">
+                <h2>Register</h2>
+                <form action="/submit-register" method="post">
+                    <input type="text" id="username" name="username" placeholder="Enter Your Name" required>
+                    <input type="number" id="number" name="number" placeholder="Enter Your Number" required>
+                    <input type="number" id="number" name="number" placeholder="Enter Your Age" required>
+                    <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+                    <button type="submit">Register</button>
+                </form>
+                <div class="message">
+                    <p>Have an account? <a onclick="login()">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
