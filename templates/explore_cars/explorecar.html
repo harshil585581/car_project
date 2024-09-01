@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font Awesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Custom CSS File Link -->
+    <link rel="stylesheet" href="{% static '/css/explorecar.css' %}">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+
+    <title>Explore Cars - Sudeeksha Cars</title>
+
+    <script>
+        function searchCars() {
+            // Simple search function - can be expanded
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            const cars = document.querySelectorAll('.car-item');
+            
+            cars.forEach(car => {
+                const carTitle = car.querySelector('.car-title').textContent.toLowerCase();
+                if (carTitle.includes(searchQuery)) {
+                    car.style.display = 'block';
+                } else {
+                    car.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    
+<header class="header">
+    <div id="menu-btn" class="fas fa-bars"></div>
+    <a href="index.html" class="logo"> <span>Sudeeksha</span>Cars </a>
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#vehicles">vehicles</a>
+        <a href="#services">services</a>
+        <a href="#featured">featured</a>
+        <a href="#reviews">reviews</a>
+        <a href="#contact">contact</a>
+    </nav>
+    <!-- <div id="login-btn">
+        <button class="btn" onclick="loginp()">login</button>
+        <button class="btn" onclick="register()">Register</button>
+    </div> -->
+</header>
+
+<section class="explore">
+    <h1 class="heading"> <span>Explore</span> Cars </h1>
+    <div class="search-bar">
+        <input type="text" id="search-bar" placeholder="Search for cars..." oninput="searchCars()">
+    </div>
+    <div class="car-list">
+        <div class="car-item">
+            <img src="{% static '/img/explore_thar.webp' %}" alt="Car Model">
+            <div class="car-details">
+                <h3 class="car-title">Mahindra Thar</h3>
+                <p class="car-description">The Thar is designed to be a rugged, reliable, and affordable 
+                    off-road vehicle that could handle the rough terrain found in many parts of India.</p>
+                <div class="car-price">Rs 1,620,000/-</div>
+                <a href="#" class="btn">View Details</a>
+            </div>
+        </div>
+        <div class="car-item">
+            <img src="{% static '/img/explore_scorpion.jpeg' %}" alt="Car Model">
+            <div class="car-details">
+                <h3 class="car-title">Scorpio N</h3>
+                <p class="car-description">The Scorpio N is a premium, large three-row SUV. It feels rugged, 
+                    spacious in the first two rows with a commanding appearance.</p>
+                <div class="car-price">Rs 2,000,000/-</div>
+                <a href="#" class="btn">View Details</a>
+            </div>
+        </div>
+        <div class="car-item">
+            <img src="{% static '/img/explore_xuv700.jpeg' %}" alt="Car Model">
+            <div class="car-details">
+                <h3 class="car-title">XUV 700</h3>
+                <p class="car-description">The XUV700, available in five- and seven-seater options, 
+                    features an attractive design and a quality cabin.</p>
+                <div class="car-price">Rs 1,710,000/-</div>
+                <a href="#" class="btn">View Details</a>
+            </div>
+        </div>
+        <div class="car-item">
+            <img src="{% static '/img/explore_bolreo_neo.avif' %}" alt="Car Model">
+            <div class="car-details">
+                <h3 class="car-title">Bolero Neo</h3>
+                <p class="car-description">The Mahindra Bolero Neo is a compact SUV designed
+                     for both city driving and off-road adventures.</p>
+                <div class="car-price">Rs 1,210,000/-</div>
+                <a href="#" class="btn">View Details</a>
+            </div>
+        </div>
+        <div class="car-item">
+            <img src="image/car-3.png" alt="Car Model 3">
+            <div class="car-details">
+                <h3 class="car-title">Fiat Avventura</h3>
+                <p class="car-description">Stylish crossover with great mileage.</p>
+                <div class="car-price">Rs 1,100,000/-</div>
+                <a href="#" class="btn">View Details</a>
+            </div>
+        </div>
+        <div class="car-item">
+            <img src="image/car-1.png" alt="Car Model 1">
+            <div class="car-details">
+                <h3 class="car-title">Mercedez</h3>
+                <p class="car-description">Luxury car with top-notch features.</p>
+                <div class="car-price">Rs 9,000,000/-</div>
+                <a href="#" class="btn">View Details</a>
+            </div>
+        </div>
+        <div class="car-item">
+            <img src="image/car-4.png" alt="Car Model 4">
+            <div class="car-details">
+                <h3 class="car-title">Audi Q7</h3>
+                <p class="car-description">Premium SUV with luxury features.</p>
+                <div class="car-price">Rs 11,000,000/-</div>
+                <a href="#" class="btn">View Details</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>our branches</h3>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Bangalore </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Hyderabad </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Chennai </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Mumbai </a>
+        </div>
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> vehicles </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> services </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> featured </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> reviews </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> contact </a>
+        </div>
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> example@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> 123 Street, City, Country </a>
+        </div>
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-linkedin-in"></i> linkedin </a>
+            <a href="#"> <i class="fab fa-youtube"></i> youtube </a>
+        </div>
+    </div>
+    <div class="credit"> &copy; 2024 Max Wheels. All rights reserved. </div>
+</footer>
+
+</body>
+</html>
