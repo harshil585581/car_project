@@ -52,7 +52,7 @@ button {
     color: #f8c100;
 }
 
-.header #login-btn {
+/* .header #login-btn {
     display: flex;
 }
 
@@ -70,7 +70,7 @@ button {
 
 .header .btn:hover {
     background-color: #e0b000;
-}
+} */
 
 /* Explore Cars Section */
 .explore {
