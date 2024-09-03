@@ -53,7 +53,7 @@
 
            $.ajax({
             type: "POST",
-            url: "/home/create_signup",
+            url: "{% url 'create_signup' %}",
             data: {"name": name, "cmob": cmob, "age": age},
             success: function(data)
             {
