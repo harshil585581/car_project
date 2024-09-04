@@ -19,6 +19,7 @@
                 <td>username</td>
                 <td>mobile_no</td>
                 <td>Age</td>
+                <td>Delete</td>
             </tr>
         </thead>
         <tbody>
@@ -27,10 +28,28 @@
                 <td>{{ obj.name }} </td>
                 <td>{{ obj.cmob }}</td>
                 <td>{{ obj.age }}</td>
+                <td><button onclick="delete_record('{{obj.cmob}}')">delete</button></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <script>
+    function delete_record(cmob)
+        {
+           $.ajax({
+            type: "POST",
+            url: "{% url 'delete_register' %}",
+            data: {"cmob": cmob},
+            success: function(data)
+            {
+                window.location.replace("/home/signup_view");
+            }
+            
+           });
+        }
+    </script>
+
 
 </body>
 </html>

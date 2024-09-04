@@ -53,3 +53,11 @@ class signup_view(TemplateView):
         user_data = signup_check.objects.all()
         context = { 'userdata': user_data}
         return context
+    
+
+
+class delete_register(APIView):
+    def post(self, request):
+        cmob = request.POST['cmob']
+        signup_check.objects.filter(cmob=cmob).delete()
+        return JsonResponse({"status": "pass"})
