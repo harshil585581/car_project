@@ -21,4 +21,5 @@ urlpatterns = [
     path("home/", include("home.urls")),
     path("buy_car/", include("buy_car.urls")),
     path("explore_cars/", include("explore_cars.urls")),
+    path("admindash/", include("admindash.urls")),
 ]

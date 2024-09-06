@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font Awesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static '/css/dash.css' %}">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2> Admin Board</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" id="dashboard-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#" id="manage-cars-link"><i class="fas fa-car"></i> Manage Cars</a></li>
+            <li><a href="#" id="users-link"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="#" id="settings-link"><i class="fas fa-cogs"></i> Settings</a></li>
+            <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header class="header">
+            <h>Fury <span>Cars</span></h>
+        </header>
+
+        <section class="content" id="dashboard-content">
+            <h1>Welcome, Admin</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Total Cars</h3>
+                    <p>150</p>
+                </div>
+                <div class="card">
+                    <h3>Total Users</h3>
+                    <p>300</p>
+                </div>
+                <div class="card">
+                    <h3>Pending Orders</h3>
+                    <p>25</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content" id="user-table-content" style="display: none;">
+            <!-- User Table -->
+            <table class="user-table" id="user-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Number</th>
+                        <th>Age</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>john@example.com</td>
+                        <td>Admin</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </section>
+
+        <section class="content" id="manage-cars-content" style="display: none;">
+            <!-- Manage Cars Table -->
+            <table class="car-table" id="car-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Model</th>
+                        <th>Brand</th>
+                        <th>Year</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Model S</td>
+                        <td>Tesla</td>
+                        <td>2023</td>
+                        <td>$80,000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Civic</td>
+                        <td>Honda</td>
+                        <td>2022</td>
+                        <td>$25,000</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        // JavaScript to handle content visibility
+        function showContent(contentId) {
+            document.getElementById('dashboard-content').style.display = 'none';
+            document.getElementById('user-table-content').style.display = 'none';
+            document.getElementById('manage-cars-content').style.display = 'none';
+            document.getElementById(contentId).style.display = 'block';
+        }
+
+        document.getElementById('dashboard-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            showContent('dashboard-content');
+        });
+
+        document.getElementById('users-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            showContent('user-table-content');
+        });
+
+        document.getElementById('manage-cars-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            showContent('manage-cars-content');
+        });
+
+        // Default to showing dashboard content
+        showContent('dashboard-content');
+    </script>
+
+</body>
+</html>
