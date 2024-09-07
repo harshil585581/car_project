@@ -1,0 +1,46 @@
+{% extends 'adminDash/dash.html' %}
+{% load static %}
+{% block content %}
+
+<section class="content" id="user-table-content">
+    <!-- User Table -->
+    <table class="user-table" id="user-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Number</th>
+                <th>Age</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in userdata %}
+            <tr>
+                <td>{{ obj.name }} </td>
+                <td>{{ obj.cmob }}</td>
+                <td>{{ obj.age }}</td>
+                <td><button onclick="delete_user('{{obj.cmob}}')">delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<script>
+    function delete_user(cmob)
+        {
+           $.ajax({
+            type: "POST",
+            url: "{% url 'delete_user' %}",
+            // orelse "adminDash/delete_user"     
+            data: {"cmob": cmob},
+            success: function(data)
+            {
+                window.location.replace("/adminDash/users_view");
+            }
+            
+           });
+        }
+    </script>
+
+{% endblock content %}

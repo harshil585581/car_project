@@ -1,0 +1,14 @@
+{% load static %}
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2> Admin Board</h2>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="/adminDash"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="/adminDash/manage_cars"><i class="fas fa-car"></i> Manage Cars</a></li>  
+        <li><a href="/adminDash/users_view"><i class="fas fa-users"></i> Users</a></li>
+        <!-- or users_table up -->
+        <li><a href="#" id="settings-link"><i class="fas fa-cogs"></i> Settings</a></li>
+        <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</div>

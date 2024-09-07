@@ -53,11 +53,11 @@
 
            $.ajax({
             type: "POST",
-            url: "{% url 'create_signup' %}",
+            url: "/adminDash/users_tb",
             data: {"name": name, "cmob": cmob, "age": age},
             success: function(data)
             {
-                window.location.replace("/home/signup_view");
+                window.location.replace("/home");
             }
             
            });

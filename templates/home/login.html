@@ -42,13 +42,13 @@
             var pass = $('#password1').val();
             $.ajax({
                 type: "POST",
-                url: "/home/login_check",
+                url: "{% url 'login_check' %}",
                 data: {"username":user ,"pass": pass},
                 success: function(data)
                 {
                     if(data["status"] == "pass")
                     {
-                        alert("login sucess");
+                        window.location.replace("/adminDash")
                     }
                     else
                     {
