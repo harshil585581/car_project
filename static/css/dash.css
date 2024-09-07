@@ -65,7 +65,7 @@ body {
   display: flex;
   align-items: center;
   height: 13.5%;
-  justify-content: center;
+  justify-content: space-between;
   padding: 20px;
   background-color: #333;
   color: #fff;
@@ -74,10 +74,16 @@ body {
 .header h {
   font-size: 60px;
   font-weight: 600;
+  margin: 0px;
 }
 
 .header h span{
   color: #f8c100;
+}
+
+.header-icon {
+  font-size: 24px; /* Adjust size as needed */
+  color: #f8c100; /* Adjust color as needed */
 }
 
 .content {
