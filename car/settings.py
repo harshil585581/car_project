@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'home',
     'buy_car',
     'explore_cars',
-    'admindash',
+    'adminDash',
 ]
 
 MIDDLEWARE = [
