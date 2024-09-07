@@ -14,6 +14,18 @@ def manage_cars(request):
     return render(request,"adminDash/manage_cars.html")
 
 
+
+class login_check(APIView):
+    def post(self,request):
+        username = request.POST['username']
+        password = request.POST['pass']
+        if username == 'harshil':
+            return JsonResponse({"status":"pass"})
+        else:
+            return JsonResponse({"status":"fail"})
+
+
+
 class users_tb(APIView):
     def post(self, request):
         name = request.POST['name']
