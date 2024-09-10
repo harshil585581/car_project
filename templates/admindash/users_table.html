@@ -2,7 +2,23 @@
 {% load static %}
 {% block content %}
 
-<section class="content" id="user-table-content">
+<section class="content" id="user-update-form-section">
+    <!-- Update User Form -->
+    <div id="update-form" style="display: none;">
+        <h2>Update User</h2>
+        <form id="user-update-form">
+            <input type="hidden" id="update-old-cmob" name="old_cmob" />
+            <label for="update-name">Username:</label>
+            <input type="text" id="update-name" name="name" /><br />
+            <label for="update-cmob">Number:</label>
+            <input type="text" id="update-cmob" name="new_cmob" /><br />
+            <label for="update-age">Age:</label>
+            <input type="number" id="update-age" name="age" /><br />
+            <button type="button" onclick="submit_update()">Submit</button>
+            <button type="button" onclick="cancel_update()">Cancel</button>
+        </form>
+    </div>
+
     <!-- User Table -->
     <table class="user-table" id="user-table">
         <thead>
@@ -10,37 +26,96 @@
                 <th>Username</th>
                 <th>Number</th>
                 <th>Age</th>
-                <th>Delete</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for obj in userdata %}
-            <tr>
-                <td>{{ obj.name }} </td>
-                <td>{{ obj.cmob }}</td>
-                <td>{{ obj.age }}</td>
-                <td><button onclick="delete_user('{{obj.cmob}}')">delete</button></td>
+            <tr id="row-{{ obj.cmob }}">
+                <td id="name-{{ obj.cmob }}">{{ obj.name }}</td>
+                <td id="cmob-{{ obj.cmob }}">{{ obj.cmob }}</td>
+                <td id="age-{{ obj.cmob }}">{{ obj.age }}</td>
+                <td>
+                    <button onclick="edit_user('{{ obj.cmob }}')">Edit</button>
+                    <button onclick="delete_user('{{ obj.cmob }}')">Delete</button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function delete_user(cmob)
-        {
-           $.ajax({
+    function edit_user(cmob) {
+        // Populate the form with the user's current data
+        const name = document.getElementById(`name-${cmob}`).innerText;
+        const oldCmob = document.getElementById(`cmob-${cmob}`).innerText;
+        const age = document.getElementById(`age-${cmob}`).innerText;
+
+        document.getElementById('update-old-cmob').value = oldCmob;
+        document.getElementById('update-name').value = name;
+        document.getElementById('update-cmob').value = oldCmob;
+        document.getElementById('update-age').value = age;
+
+        // Show the update form
+        document.getElementById('update-form').style.display = 'block';
+    }
+
+    function cancel_update() {
+        // Hide the update form
+        document.getElementById('update-form').style.display = 'none';
+    }
+
+    function submit_update() {
+        const oldCmob = document.getElementById('update-old-cmob').value;
+        const name = document.getElementById('update-name').value;
+        const newCmob = document.getElementById('update-cmob').value;
+        const age = document.getElementById('update-age').value;
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'update_user' %}",
+            data: {
+                "old_cmob": oldCmob,  // Pass the old number to identify the record
+                "new_cmob": newCmob,
+                "name": name,
+                "age": age,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    location.reload();  // Reload the page to reflect changes
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function() {
+                alert('An error occurred');
+            }
+        });
+    }
+
+    function delete_user(cmob) {
+        $.ajax({
             type: "POST",
             url: "{% url 'delete_user' %}",
-            // orelse "adminDash/delete_user"     
-            data: {"cmob": cmob},
-            success: function(data)
-            {
-                window.location.replace("/adminDash/users_view");
+            data: {
+                "cmob": cmob,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    document.getElementById(`row-${cmob}`).remove();
+                } else {
+                    alert('Error deleting user');
+                }
+            },
+            error: function() {
+                alert('An error occurred');
             }
-            
-           });
-        }
-    </script>
+        });
+    }
+</script>
 
 {% endblock content %}

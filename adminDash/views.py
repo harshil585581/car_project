@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from adminDash.models import reg_check
+from django.views.decorators.csrf import csrf_exempt
+
 
 def dash(request):
     return render(request,"adminDash/dash.html")
@@ -53,9 +55,36 @@ class users_view(TemplateView):
         context = { 'userdata': user_data}
         return context
     
-class delete_user(APIView):
-    def post(self, request):
-        cmob = request.POST['cmob']
-        reg_check.objects.filter(cmob=cmob).delete()
-        return JsonResponse({"status": "pass"})
+@csrf_exempt
+def delete_user(request):
+    if request.method == 'POST':
+        try:
+            cmob = request.POST.get('cmob')
+            user = reg_check.objects.get(cmob=cmob)
+            user.delete()
+            return JsonResponse({'status': 'success'})
+        except reg_check.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
 
+
+
+@csrf_exempt
+def update_user(request):
+    if request.method == 'POST':
+        old_cmob = request.POST.get('old_cmob')
+        new_cmob = request.POST.get('new_cmob')
+        name = request.POST.get('name')
+        age = request.POST.get('age')
+
+        try:
+            user = reg_check.objects.get(cmob=old_cmob)
+            # Update the user details
+            user.cmob = new_cmob
+            user.name = name
+            user.age = age
+            user.save()
+            return JsonResponse({'status': 'success'})
+        except reg_check.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})

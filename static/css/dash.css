@@ -121,7 +121,7 @@ body {
 .user-table, .car-table {
     margin: 20px;
     border-collapse: collapse;
-    width: 100%;
+    width: 95%;
 }
 
 .user-table th, .user-table td, .car-table th, .car-table td {
