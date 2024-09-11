@@ -78,15 +78,17 @@ def update_user(request):
         new_cmob = request.POST.get('new_cmob')
         name = request.POST.get('name')
         age = request.POST.get('age')
+        password = request.POST.get('password')
 
         try:
             user = reg_check.objects.get(cmob=old_cmob)
-            # Update the user details
-            user.cmob = new_cmob
             user.name = name
+            user.cmob = new_cmob
             user.age = age
-            user.save()
+            user.password = password
+            user.save()        
             return JsonResponse({'status': 'success'})
         except reg_check.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'User not found'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
