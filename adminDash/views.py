@@ -33,10 +33,12 @@ class users_tb(APIView):
         name = request.POST['name']
         cmob = request.POST['cmob']
         age = request.POST['age']
+        password = request.POST['password']
         usr = reg_check()
         usr.name = name
         usr.cmob = cmob
         usr.age = age
+        usr.password = password
         usr.save()
         # print(username)
         # print(email)

@@ -47,14 +47,16 @@
            var name = $('#username').val();
            var cmob = $('#number').val();
            var age = $('#age').val();
+           var password = $('#password').val();
            console.log("name: ", name);
            console.log("cmob: ", cmob);
            console.log("age: ", age);
+           console.log("age: ", password);
 
            $.ajax({
             type: "POST",
             url: "/adminDash/users_tb",
-            data: {"name": name, "cmob": cmob, "age": age},
+            data: {"name": name, "cmob": cmob, "age": age, "password": password},
             success: function(data)
             {
                 window.location.replace("/home");
