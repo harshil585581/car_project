@@ -5,3 +5,4 @@ class reg_check(models.Model):
     cmob = models.IntegerField()
     age = models.IntegerField()
     password = models.CharField(max_length=250, default='')
+    role = models.CharField(max_length=250, blank=True)

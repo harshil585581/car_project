@@ -21,22 +21,26 @@ class login_check(APIView):
     def post(self,request):
         username = request.POST['username']
         password = request.POST['pass']
-        if username == 'harshil':
-            return JsonResponse({"status":"pass"})
+        ent = reg_check.objects.filter(name = username, password = password).values()
+        if(len(ent) > 0):
+            return JsonResponse({"status":"pass", "name": ent[0]["name"], "role": ent[0]["role"]})
         else:
             return JsonResponse({"status":"fail"})
 
+        
 
 
 class users_tb(APIView):
     def post(self, request):
         name = request.POST['name']
         cmob = request.POST['cmob']
+        role = request.POST['role']
         age = request.POST['age']
         password = request.POST['password']
         usr = reg_check()
         usr.name = name
         usr.cmob = cmob
+        usr.role = role
         usr.age = age
         usr.password = password
         usr.save()

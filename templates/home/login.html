@@ -21,11 +21,9 @@
         <div class="cont">
             <div class="login-container">
                 <h2>Login</h2>
-                <form> 
                     <input type="text" id="username1" name="username" placeholder="Username" required>
                     <input type="password" id="password1" name="password" placeholder="Password" required>
-                    <button type="submit" onclick="check()">Login</button>
-               </form> 
+                    <button type="submit" onclick="checkauth()">Login</button>
                 <div class="message">
                     <p>Don't have an account? <a href="/home/register_page">Register here</a></p>
                     <p><a href="/forgot-password">Forgot password?</a></p>
@@ -36,7 +34,7 @@
 
 
     <script>
-        function check()
+        function checkauth()
         {
             var user = $('#username1').val();
             var pass = $('#password1').val();
@@ -44,17 +42,25 @@
                 type: "POST",
                 url: "{% url 'login_check' %}",
                 data: {"username":user ,"pass": pass},
-                success: function(data)
-                {
-                    if(data["status"] == "pass")
+                success: function(data){
+                   if (data["status"] == "pass")
+                   {
+                    console.log("Welcome ", data["name"]);
+                    if(data["role"] == "Admin")
                     {
                         window.location.replace("/adminDash")
                     }
-                    else
+                    else if(data["role"] == "Customer")
                     {
-                        alert("fail")
+                        window.location.replace("/home")
                     }
+                   }
+                   else
+                   {
+                    alert("login failed");
+                   }
                 }
+
             });
         }
     </script>
