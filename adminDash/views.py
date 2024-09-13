@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from adminDash.models import reg_check
+from adminDash.models import car_check
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -14,6 +15,9 @@ def users_table(request):
 
 def manage_cars(request):
     return render(request,"adminDash/manage_cars.html")
+
+def add_car(request):
+    return render(request,"adminDash/add_car.html")
 
 
 
@@ -96,3 +100,73 @@ def update_user(request):
             return JsonResponse({'status': 'error', 'message': 'User not found'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
+
+
+
+
+class car_tb(APIView):
+    def post(self, request):
+        carName = request.POST['carName']
+        carDesc = request.POST['carDesc']
+        carPrice = request.POST['carPrice']
+        csr = car_check()
+        csr.carName = carName
+        csr.carDesc = carDesc
+        csr.carPrice = carPrice
+        csr.save()
+        # print(username)
+        # print(email)
+        # print(password)
+        # print(utype)
+        return JsonResponse({"status": "pass"})
+
+from django.views.generic import TemplateView
+
+class managecar_view(TemplateView):
+    template_name = "adminDash/manage_cars.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_data = car_check.objects.all()
+        context = { 'userdata': user_data}
+        return context
+    
+class car_view(TemplateView):
+    template_name = "explore_cars/explorecar.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_data = car_check.objects.all()
+        context = { 'userdata': user_data}
+        return context
+    
+@csrf_exempt
+def delete_car(request):
+    if request.method == 'POST':
+        try:
+            id = request.POST.get('id')
+            car = car_check.objects.get(id=id)
+            car.delete()
+            return JsonResponse({'status': 'success'})
+        except reg_check.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+
+
+def update_car(request):
+    if request.method == "POST":
+        car_id = request.POST.get('id')
+        car_name = request.POST.get('carName')
+        car_desc = request.POST.get('carDesc')
+        car_price = request.POST.get('carPrice')
+
+        try:
+            car = car_check.objects.get(id=car_id)
+            car.carName = car_name
+            car.carDesc = car_desc
+            car.carPrice = car_price
+            car.save()
+            return JsonResponse({"status": "success"})
+        except car_check.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Car not found"})
+    return JsonResponse({"status": "error", "message": "Invalid request"})
