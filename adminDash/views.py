@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from adminDash.models import reg_check
