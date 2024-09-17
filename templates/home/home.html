@@ -30,8 +30,15 @@
         <a href="#contact">contact</a>
     </nav>
     <div id="login-btn">
-        <a href="/home/login_page"><button class="btn">login</button></a>
-        <a href="/home/register_page"> <button class="btn">Register</button></a>
+        <!-- {% if currentuser == currentuser %} -->
+            <h2>Hi, {{ currentuser }}</h2>
+            <a href="/home/login_page"><button class="btn">login</button></a>
+            <a href="/home/register_page"> <button class="btn">Register</button></a>
+            <!-- <a href="{% url 'logout_view' %}"><button class="btn">Logout</button></a>
+        {% else %} -->
+            
+            <!-- print those 2 lines -->
+        <!-- {% endif %} -->
     </div>
 </header>
 
