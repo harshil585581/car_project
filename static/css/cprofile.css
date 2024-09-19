@@ -115,12 +115,12 @@ body {
   
   .card h3 {
     margin: 0;
-    font-size: 22px;
+    font-size: 32px;
     color: #333;
   }
   
   .card p {
-    font-size: 36px;
+    font-size: 30px;
     margin: 10px 0;
     color: #3498db; /* Same as sidebar color for consistency */
   }

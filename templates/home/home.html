@@ -32,7 +32,7 @@
     <div id="login-btn">
         {% if currentuser and currentuser != "Guest" %}
             <h2>Hi, {{ currentuser }}</h2>
-            <a href=""><button class="btn">Profile</button></a> 
+            <a href="{% url 'cprofile' %}"><button class="btn">Profile</button></a> 
             <a href="{% url 'logout_view' %}"><button class="btn">Logout</button></a>
         {% else %}
             <a href="/home/register_page"><button class="btn">Register</button></a>
