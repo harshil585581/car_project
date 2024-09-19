@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font Awesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+    
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/cprofile.css' %}"> <!-- Update the path as needed -->
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2> Hi, {{ currentuser }}</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/adminDash"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/adminDash/managecar_view"><i class="fas fa-car"></i> Saved Cars</a></li>  
+            <li><a href="/adminDash/add_car" id="settings-link"><i class="fas fa-cogs"></i> Upload Documents</a></li>
+            <li><a href="/adminDash/users_view"><i class="fas fa-users"></i> Support</a></li>
+            <li><a href="/adminDash/logout1"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header class="header">
+            <h>Fury <span>Cars</span></h>
+            <div class="header-icon">
+                <i class="fas fa-user"></i>
+            </div>
+        </header>
+
+        <section class="content" id="dashboard-content">
+            <h1>Welcome {{ currentuser }}</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Username</h3>
+                    <p>{{ total_cars }}</p>
+                </div>
+                <div class="card">
+                    <h3>Number</h3>
+                    <p>{{ total_users }}</p>
+                </div>
+                <div class="card">
+                    <h3>Password</h3>
+                    <p>{{ pending_orders }}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

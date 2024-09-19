@@ -31,6 +31,10 @@ def register(request):
     # return HttpResponse("Hello, world. You're at the loans index.")
     return render(request,"home/register.html")
 
+def cprofile(request):
+    # return HttpResponse("Hello, world. You're at the loans index.")
+    return render(request,"home/cprofile.html")
+
 def logout_view(request):
     logout(request)
     return redirect("home")
