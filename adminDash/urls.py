@@ -9,6 +9,7 @@ urlpatterns = [
     path("add_car", views.add_car, name="add_car"),
 
     path("login_check",views.login_check.as_view(),name="login_check"),
+    path("logout1",views.logout1,name="logout1"),
 
     path("users_tb", views.users_tb.as_view(),name="users_tb"),
     path("users_view", views.users_view.as_view(),name="users_view"),

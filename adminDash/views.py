@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from adminDash.models import reg_check
 from adminDash.models import car_check
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout
 
 
 def dash(request):
@@ -37,6 +38,9 @@ def manage_cars(request):
 def add_car(request):
     return render(request,"adminDash/add_car.html")
 
+def logout1(request):
+    logout(request)
+    return redirect("login_page")
 
 
 class login_check(APIView):
@@ -159,7 +163,7 @@ class car_view(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user_data = car_check.objects.all()
-        context = { 'userdata': user_data}
+        context = {'userdata': user_data}
         return context
     
 @csrf_exempt
