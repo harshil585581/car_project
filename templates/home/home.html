@@ -11,6 +11,7 @@
     
     <!-- Custom CSS File Link -->
     <link rel="stylesheet" href="{% static '/css/home.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
@@ -202,14 +203,14 @@
     <h1 class="heading"><span>contact</span> us</h1>
     <div class="row">
         <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15584.788104761176!2d77.57131879999999!3d12.9240298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15831cbbb4d1%3A0x22b569d50f0148f2!2s2242%2C%2023rd%20Cross%20Rd%2C%20Karesandra%2C%20Banashankari%20Stage%20II%2C%20Banashankari%2C%20Bengaluru%2C%20Karnataka%20560070!5e0!3m2!1sen!2sin!4v1632137920043!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-        <form action="#">
+        <div class="form">
             <h3>Get in touch</h3>
-            <input type="text" placeholder="Your name" class="box">
-            <input type="email" placeholder="Your email" class="box">
-            <input type="tel" placeholder="Subject" class="box">
-            <textarea placeholder="Your message" class="box" cols="30" rows="10"></textarea>
-            <input type="submit" value="send message" class="btn">
-        </form>
+            <input type="text" placeholder="Your name" class="box" id="name">
+            <input type="email" placeholder="Your email" class="box" id="email">
+            <input type="tel" placeholder="Subject" class="box" id="mob">
+            <textarea placeholder="Your message" class="box" cols="30" rows="10" id="msg"></textarea>
+            <button type="submit" value="send message" class="btn" onclick="submitmsg()">send message</button>
+        </div>
     </div>
 </section>
 
@@ -246,6 +247,31 @@
     </div>
     <div class="credit"> &copy; 2024 Fury cars. All rights reserved. </div>
 </footer>
+
+
+<script>
+    function submitmsg(){
+           var name = $('#name').val();
+           var email = $('#email').val();
+           var mob = $('#mob').val();
+           var msg = $('#msg').val();
+
+           console.log("name: ", name);
+           console.log("mob: ", mob);
+           console.log("msg: ", msg);
+
+           $.ajax({
+            type: "POST",
+            url: "/home/contact_tb",
+            data: {"name": name, "email": email, "mob": mob, "msg": msg},
+            success: function(data)
+            {
+                location.reload();
+            }
+            
+           });
+    }
+</script>
 
 </body>
 </html>

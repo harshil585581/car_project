@@ -57,7 +57,6 @@
         <input type="text" id="search-bar" placeholder="Search for cars..." oninput="searchCars()">
     </div>
     <div class="car-list">
-
         {% for obj in userdata %}
         <div class="car-item">
             <img src="{% static '/img/explore_thar.webp' %}" alt="Car Model">
@@ -66,11 +65,12 @@
                 <p class="car-description">{{obj.carDesc}}</p>
                 <div class="car-price">Rs {{obj.carPrice}} /-</div>
                 <a href="#" class="btn">View Details</a>
+                <a href="#" class="btn" onclick="save('{{ obj.carName }}', '{{ obj.carDesc }}', '{{ obj.carPrice }}')">Save</a>
             </div>
         </div>
         {% endfor %}
-        
     </div>
+    
 </section>
 
 <footer class="footer">
@@ -108,5 +108,11 @@
     <div class="credit"> &copy; 2024 Max Wheels. All rights reserved. </div>
 </footer>
 
+
+<script>
+    function save(){
+        
+    }
+</script>
 </body>
 </html>

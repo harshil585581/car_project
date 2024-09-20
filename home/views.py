@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from adminDash.models import reg_check
+from home.models import contact_us
 from django.contrib.auth import logout
 from django.views.generic import TemplateView
 
@@ -51,6 +52,25 @@ def cprofile(request):
     # Render the template with the context
     return render(request,"home/cprofile.html", context)
 
+
+
+class contact_tb(APIView):
+    def post(self, request):
+        name = request.POST['name']
+        email = request.POST['email']
+        mob = request.POST['mob']
+        msg = request.POST['msg']
+        csr = contact_us()
+        csr.name = name
+        csr.email = email
+        csr.subject = mob
+        csr.message = msg
+        csr.save()
+        # print(username)
+        # print(email)
+        # print(password)
+        # print(utype)
+        return JsonResponse({"status": "pass"})
 
 
 class cprofile(TemplateView):

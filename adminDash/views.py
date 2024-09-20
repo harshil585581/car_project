@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from rest_framework.views import APIView
@@ -14,19 +14,24 @@ def dash(request):
     user_data = reg_check.objects.all()
     
     # Get the current user from the session
-    current_user = request.session.get("user_data", "Guest")
+    username = request.session.get("user_data", "Guest")
+    
+    # Handle case where user might not be found
+    user1 = get_object_or_404(reg_check, name=username)
     
     # Prepare context
     context = {
         'userdata': user_data,
-        'currentuser': current_user
+        'currentuser': username,  # Use username directly
+        'role': user1.role        #gets role of user
     }
     
     # Print the current user (for debugging purposes)
-    print("***********:request ", current_user)
+    print("***********:request ", username)
     
     # Render the template with the context
     return render(request, "adminDash/dash.html", context)
+
 
 
 def users_table(request):
