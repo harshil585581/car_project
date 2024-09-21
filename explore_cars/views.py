@@ -4,9 +4,6 @@ from django.views.generic import TemplateView
 from django.http import JsonResponse
 from adminDash.models import car_check
 
-def explorecars(request):
-    return render(request,"explore_cars/explorecar.html")
-
 class car_view(TemplateView):
     template_name = "explore_cars/explorecar.html"
 
