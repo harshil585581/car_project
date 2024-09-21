@@ -1,0 +1,24 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <!-- Include your CSS files -->
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <div class="car-list">
+        {% for car in cars %}
+        <div class="car-item">
+            <h3>{{ car.name }}</h3>
+            <p>{{ car.description }}</p>
+            <p>Price: Rs {{ car.price }}</p>
+        </div>
+        {% empty %}
+        <p>Your cart is empty.</p>
+        {% endfor %}
+    </div>
+    <a href="{% url 'home' %}">Continue Shopping</a>
+</body>
+</html>

@@ -18,7 +18,7 @@ urlpatterns = [
 
     path("car_tb", views.car_tb.as_view(),name="car_tb"),
     path("managecar_view", views.managecar_view.as_view(),name="managecar_view"),
-    path("car_view", views.car_view.as_view(),name="car_view"),
+    
     path("delete_car", views.delete_car,name="delete_car"),
     path("update_car", views.update_car,name="update_car"),
 ]
