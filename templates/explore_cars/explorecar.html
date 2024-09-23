@@ -61,15 +61,19 @@
         <div class="car-item">
             <img src="{% static '/img/explore_thar.webp' %}" alt="Car Model">
             <div class="car-details">
-                <h3 class="car-title">{{obj.carName}}</h3>
-                <p class="car-description">{{obj.carDesc}}</p>
-                <div class="car-price">Rs {{obj.carPrice}} /-</div>
+                <h3 class="car-title">{{ obj.carName }}</h3>
+                <p class="car-description">{{ obj.carDesc }}</p>
+                <div class="car-price">Rs {{ obj.carPrice }} /-</div>
                 <a href="#" class="btn">View Details</a>
-                <a href="#" class="btn" onclick="save('{{ obj.carName }}', '{{ obj.carDesc }}', '{{ obj.carPrice }}')">Save</a>
+                <form action="{% url 'add_to_cart' obj.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Save</button>
+                </form>
             </div>
         </div>
         {% endfor %}
     </div>
+    
     
 </section>
 
@@ -110,8 +114,11 @@
 
 
 <script>
-    function save(){
-        
+    function save(car) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(car);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(car.carName + ' has been added to your cart!');
     }
 </script>
 </body>

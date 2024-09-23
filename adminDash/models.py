@@ -10,4 +10,4 @@ class reg_check(models.Model):
 class car_check(models.Model):
     carName = models.CharField(max_length=250)
     carDesc = models.CharField(max_length=2000)
-    carPrice = models.CharField(max_length=250)
+    carPrice = models.DecimalField(max_digits=10, decimal_places=2) 

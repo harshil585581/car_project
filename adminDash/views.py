@@ -1,16 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
 from django.views.generic import TemplateView
 from django.http import JsonResponse
 from adminDash.models import reg_check
 from adminDash.models import car_check
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import logout
 
 
-def dash(request):
+def adminDash(request):
     user_data = reg_check.objects.all()
     
     # Get the current user from the session
