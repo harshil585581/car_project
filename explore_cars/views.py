@@ -5,9 +5,19 @@ from django.http import JsonResponse
 from adminDash.models import car_check
 from explore_cars.models import Cart
 
-def car_view(request):
-    userdata = car_check.objects.all()
-    return render(request, 'explore_cars/explorecar.html', {'userdata': userdata})
+
+class car_view(TemplateView):
+    template_name = "explore_cars/explorecar.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_data = car_check.objects.all()
+        context = {'userdata': user_data}
+        return context
+# or
+# def car_view(request):
+#     userdata = car_check.objects.all()
+#     return render(request, 'explore_cars/explorecar.html', {'userdata': userdata})
     
 
 def add_to_cart(request, car_id):
