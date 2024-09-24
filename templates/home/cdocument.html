@@ -1,0 +1,107 @@
+{% extends 'home/cprofile.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static '/css/cart.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+    <title>Document Upload - Fury Cars</title>
+    <style>
+        /* Table Styling */
+        #upload-docs {
+            margin: 20px;
+            border-collapse: collapse;
+            width: 95%;
+        }
+
+        #upload-docs th, #upload-docs td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #upload-docs th {
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+        }
+
+        #upload-docs tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #upload-docs tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Button Styling */
+        .upload-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .upload-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload Your Documents</h2>
+
+    <table id="upload-docs">
+        <thead>
+            <tr>
+                <th>Document Name</th>
+                <th>Upload</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Driving License</td>
+                <td><input type="file" id="driving-license" accept=".jpg,.jpeg,.png,.pdf"></td>
+            </tr>
+            <tr>
+                <td>PAN Card</td>
+                <td><input type="file" id="pan-card" accept=".jpg,.jpeg,.png,.pdf"></td>
+            </tr>
+            <tr>
+                <td>Aadhar Card</td>
+                <td><input type="file" id="aadhar-card" accept=".jpg,.jpeg,.png,.pdf"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="upload-btn" onclick="submitDocuments()">Submit Documents</button>
+
+    <script>
+        function submitDocuments() {
+            const drivingLicense = document.getElementById('driving-license').files[0];
+            const panCard = document.getElementById('pan-card').files[0];
+            const aadharCard = document.getElementById('aadhar-card').files[0];
+
+            if (!drivingLicense || !panCard || !aadharCard) {
+                alert('Please upload all required documents.');
+                return;
+            }
+
+            // Logic to handle the file uploads (e.g., using AJAX)
+            alert('Documents submitted successfully!');
+        }
+    </script>
+</body>
+</html>
+
+{% endblock content %}

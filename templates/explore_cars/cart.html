@@ -1,4 +1,7 @@
+{% extends 'home/cprofile.html' %}
 {% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,38 +11,72 @@
     <link rel="stylesheet" href="{% static '/css/cart.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
     <title>Your Cart - Fury Cars</title>
+    <style>
+        /* Table Styling */
+        #cart-items {
+            margin: 20px;
+            border-collapse: collapse;
+            width: 95%;
+        }
+
+        #cart-items th, #cart-items td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #cart-items th {
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+        }
+
+        #cart-items tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #cart-items tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Total Price Styling */
+        .total-price {
+            font-size: 1.5em;
+            margin: 20px;
+            font-weight: 600;
+        }
+
+    </style>
 </head>
 <body>
-    <header class="header">
-        <a class="logo"> <span>Fury</span>Cars </a>
-        <nav class="navbar">
-            <a href="#home">home</a>
-            <a href="#vehicles">vehicles</a>
-            <a href="#contact">contact</a>
-        </nav>
-    </header>
+    <h2>Your Cart</h2>
 
-    <section class="cart">
-        <h1 class="heading">Your Cart</h1>
-        <div id="cart-items">
-            {% for item in cart_items %}
-            <div class="cart-item">
-                <h3>{{ item.car.carName }}</h3>
-                <p>{{ item.car.carDesc }}</p>
-                <div class="car-price">Rs {{ item.car.carPrice }} /-</div>
-                <div class="quantity">Quantity: {{ item.quantity }}</div>
-            </div>
-            {% empty %}
-            <p>Your cart is empty.</p>
-            {% endfor %}
-        </div>
-        <div class="total-price">
-            Total Price: Rs {{ total_price|floatformat:2 }} /-  <!-- Use floatformat to show two decimal places -->
-        </div>
-    </section>
+    {% if item_prices %}
+        <table id="cart-items">
+            <thead>
+                <tr>
+                    <th>Car Name</th>
+                    <th>Quantity</th>
+                    <th>Price per Car</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in item_prices %}
+                <tr>
+                    <td>{{ item.car.carName }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.car.carPrice }}</td>
+                    <td>{{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3 class="total-price">Total Cart Price: {{ total_price }}</h3>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
 
-    <footer class="footer">
-        <!-- Footer content as before -->
-    </footer>
 </body>
 </html>
+
+{% endblock content %}

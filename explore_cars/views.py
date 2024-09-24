@@ -31,21 +31,32 @@ def add_to_cart(request, car_id):
         if not created:
             # If the item exists, increment the quantity
             cart_item.quantity += 1
-            cart_item.save()
+        
+        # Update the total price of the item
+        cart_item.update_total_price()
 
-        return redirect('cart')  # Redirect to cart page after adding
+        return redirect('view_cart')  # Redirect to cart page after adding
+
 
 def view_cart(request):
     user_id = request.user.id  # or get it from session, etc.
     cart_items = Cart.objects.filter(user_id=user_id).select_related('car')
     
-    # Calculate the total price
-    total_price = sum(item.car.carPrice * item.quantity for item in cart_items)
-    
-    # Ensure total_price is a float
-    total_price = float(total_price)
+    # Calculate the total price from the database
+    total_price = sum(item.total_price for item in cart_items)
 
-    return render(request, 'explore_cars/cart.html', {'cart_items': cart_items, 'total_price': total_price})
+    item_prices = [{
+        'car': item.car,  # This includes car details
+        'quantity': item.quantity,
+        'total_price': item.total_price
+    } for item in cart_items]
+
+    return render(request, 'explore_cars/cart.html', {
+        'item_prices': item_prices,
+        'total_price': total_price
+    })
+
+
 
 
 def ex(request):

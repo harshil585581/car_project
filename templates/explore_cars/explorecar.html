@@ -113,13 +113,5 @@
 </footer>
 
 
-<script>
-    function save(car) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(car);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert(car.carName + ' has been added to your cart!');
-    }
-</script>
 </body>
 </html>

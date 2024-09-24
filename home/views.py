@@ -34,6 +34,10 @@ def register(request):
     # return HttpResponse("Hello, world. You're at the loans index.")
     return render(request,"home/register.html")
 
+def cdocument(request):
+    # return HttpResponse("Hello, world. You're at the loans index.")
+    return render(request,"home/cdocument.html")
+
 def cprofile(request):
     user_data = reg_check.objects.all()
     

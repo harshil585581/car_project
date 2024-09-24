@@ -5,6 +5,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("login_page", views.login, name="login_page"),
     path("register_page", views.register, name="register_page"),
+    path("cdocument", views.cdocument, name="cdocument"),
     path("cprofile", views.cprofile.as_view(), name="cprofile"), 
     path("contact_tb", views.contact_tb.as_view(), name="contact_tb"), 
 
