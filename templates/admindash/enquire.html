@@ -1,0 +1,97 @@
+{% extends 'adminDash/dash.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #fff;
+}
+
+button.update-btn {
+    background-color: #007bff; 
+}
+
+button.update-btn:hover {
+    background-color: #0069d9;
+}
+
+button.delete-btn {
+    background-color: #f44336; /* Red */
+}
+
+button.delete-btn:hover {
+    background-color: #e53935;
+}
+
+/*  Style the Update Car Form */
+#update-car-form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#update-car-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#update-car-form input[type="text"],
+#update-car-form textarea {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#update-car-form button {
+    background-color: #007BFF; /* Blue */
+}
+
+#update-car-form button:hover {
+    background-color: #0056b3;
+}
+
+</style>
+
+<section class="content" id="manage-cars-content">
+    <!-- Manage Cars Table -->
+    <table class="user-table" id="user-table">
+        <thead>
+            <tr>
+                <th>Enquiry Date</th>
+                <th>User Name</th>
+                <th>User Phone Number</th>
+                <th>Car Name</th>
+                <th>Car Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enquiry in userdata %}
+            <tr id="row-{{ enquiry.user_phone_number }}">
+                <td>{{ enquiry.enquiry_date }}</td>
+                <td>{{ enquiry.user_name }}</td>
+                <td>{{ enquiry.user_phone_number }}</td>
+                <td>{{ enquiry.car_name }}</td>
+                <td>{{ enquiry.car_price }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No enquiries found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+
+{% endblock content %}

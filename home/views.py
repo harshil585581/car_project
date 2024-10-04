@@ -38,24 +38,6 @@ def cdocument(request):
     # return HttpResponse("Hello, world. You're at the loans index.")
     return render(request,"home/cdocument.html")
 
-def cprofile(request):
-    user_data = reg_check.objects.all()
-    
-    # Get the current user from the session
-    current_user = request.session.get("user_data", "Guest")
-    
-    # Prepare context
-    context = {
-        'userdata': user_data,
-        'currentuser': current_user
-    }
-    
-    # Print the current user (for debugging purposes)
-    print("***********:request ", current_user)
-    
-    # Render the template with the context
-    return render(request,"home/cprofile.html", context)
-
 
 
 class contact_tb(APIView):

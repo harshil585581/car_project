@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
 from django.views.generic import TemplateView
-from django.http import JsonResponse
-from adminDash.models import reg_check
-from adminDash.models import car_check
+from django.http import JsonResponse  
+from adminDash.models import reg_check,car_check
+from home.models import contact_us
+from explore_cars.models import Enquiry
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -36,11 +37,6 @@ def adminDash(request):
 def users_table(request):
     return render(request,"adminDash/users_table.html")
 
-def manage_cars(request):
-    return render(request,"adminDash/manage_cars.html")
-
-def add_car(request):
-    return render(request,"adminDash/add_car.html")
 
 def logout1(request):
     logout(request)
@@ -193,3 +189,36 @@ def update_car(request):
         except car_check.DoesNotExist:
             return JsonResponse({"status": "error", "message": "Car not found"})
     return JsonResponse({"status": "error", "message": "Invalid request"})
+
+
+class enquire_view(TemplateView):
+    template_name = "adminDash/enquire.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_data = Enquiry.objects.all()
+        context = {'userdata': user_data}
+        return context
+
+
+
+class ContactUsView(TemplateView):
+    template_name = "adminDash/ContactUsView.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        contact_data = contact_us.objects.all()  # Fetch all contact messages
+        context['contactdata'] = contact_data   # Add to the context
+        return context
+    
+
+def delete_contact(request):
+    if request.method == 'POST':
+        contact_id = request.POST.get('contact_id')
+        try:
+            contact = contact_us.objects.get(id=contact_id)
+            contact.delete()
+            return JsonResponse({'status': 'success'})
+        except contact_us.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Contact not found.'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request.'})

@@ -10,5 +10,5 @@ urlpatterns = [
     path("contact_tb", views.contact_tb.as_view(), name="contact_tb"), 
 
     path('logout_view', views.logout_view, name='logout_view'),
-   
+
 ]

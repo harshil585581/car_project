@@ -1,14 +1,14 @@
 {% extends 'home/cprofile.html' %}
 {% load static %}
-{% block content %}
 
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{% static '/css/cart.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
     <title>Your Cart - Fury Cars</title>
     <style>
@@ -44,7 +44,6 @@
             margin: 20px;
             font-weight: 600;
         }
-
     </style>
 </head>
 <body>
@@ -55,18 +54,22 @@
             <thead>
                 <tr>
                     <th>Car Name</th>
-                    <th>Quantity</th>
-                    <th>Price per Car</th>
                     <th>Total Price</th>
+                    <th>Enquire</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in item_prices %}
                 <tr>
                     <td>{{ item.car.carName }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.car.carPrice }}</td>
                     <td>{{ item.total_price }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'enquire' item.car.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="{{ item.quantity }}">
+                            <button type="submit">Enquire</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -75,8 +78,6 @@
     {% else %}
         <p>Your cart is empty.</p>
     {% endif %}
-
 </body>
 </html>
-
 {% endblock content %}

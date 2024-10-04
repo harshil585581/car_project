@@ -5,8 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.adminDash, name="adminDash"),
     path("users_table", views.users_table, name="users_table"),
-    path("manage_cars", views.manage_cars, name="manage_cars"),
-    path("add_car", views.add_car, name="add_car"),
 
     path("login_check",views.login_check.as_view(),name="login_check"),
     path("logout1",views.logout1,name="logout1"),
@@ -21,4 +19,9 @@ urlpatterns = [
     
     path("delete_car", views.delete_car,name="delete_car"),
     path("update_car", views.update_car,name="update_car"),
+
+    path('enquire_view/', views.enquire_view.as_view(), name='enquire_view'),
+
+    path('ContactUsView', views.ContactUsView.as_view(), name='ContactUsView'),
+    path('delete_contact/', views.delete_contact, name='delete_contact'),
 ]

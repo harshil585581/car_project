@@ -22,4 +22,5 @@ urlpatterns = [
     path("buy_car/", include("buy_car.urls")),
     path("explore_cars/", include("explore_cars.urls")),
     path("adminDash/", include("adminDash.urls")),
+    path("vendorDash/", include("vendorDash.urls")),
 ]

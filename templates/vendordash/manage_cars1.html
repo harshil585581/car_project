@@ -1,0 +1,176 @@
+{% extends 'adminDash/dash.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #fff;
+}
+
+button.update-btn {
+    background-color: #007bff; 
+}
+
+button.update-btn:hover {
+    background-color: #0069d9;
+}
+
+button.delete-btn {
+    background-color: #f44336; /* Red */
+}
+
+button.delete-btn:hover {
+    background-color: #e53935;
+}
+
+/*  Style the Update Car Form */
+#update-car-form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#update-car-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#update-car-form input[type="text"],
+#update-car-form textarea {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#update-car-form button {
+    background-color: #007BFF; /* Blue */
+}
+
+#update-car-form button:hover {
+    background-color: #0056b3;
+}
+
+</style>
+
+<section class="content" id="manage-cars-content">
+    <!-- Manage Cars Table -->
+    <table class="car-table" id="car-table">
+        <thead>
+            <tr>
+                <th>Car Name</th>
+                <th>Car Description</th>
+                <th>Price</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in userdata %}
+            <tr id="row-{{ obj.id }}">
+                <td id="carName-{{ obj.id }}">{{ obj.carName }}</td>
+                <td id="carDesc-{{ obj.id }}">{{ obj.carDesc }}</td>
+                <td id="carPrice-{{ obj.id }}">Rs {{ obj.carPrice }} /-</td>
+                <td><button class="update-btn" onclick="showUpdateForm('{{ obj.id }}');">Update</button></td>
+                <td><button class="delete-btn" onclick="delete_car('{{ obj.id }}');">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Update Car Form -->
+    <div id="update-car-form" style="display:none;">
+        <h3>Update Car Details</h3>
+        <form id="car-update-form">
+            <input type="hidden" id="update-id" name="id" />
+            <label for="update-carName">Car Name:</label>
+            <input type="text" id="update-carName" name="carName" required /><br>
+            <label for="update-carDesc">Car Description:</label>
+            <textarea type="text" id="update-carDesc" rows="4" placeholder="Enter car description" name="carDesc" required></textarea><br>
+            <label for="update-carPrice">Price:</label>
+            <input type="text" id="update-carPrice" name="carPrice" required /><br>
+            <button type="button" onclick="update_car();">Save Changes</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    function showUpdateForm(id) {
+        // Fill the form with current car data
+        document.getElementById('update-id').value = id;
+        document.getElementById('update-carName').value = document.getElementById(`carName-${id}`).innerText;
+        document.getElementById('update-carDesc').value = document.getElementById(`carDesc-${id}`).innerText;
+        document.getElementById('update-carPrice').value = document.getElementById(`carPrice-${id}`).innerText.replace('Rs ', '' , '/-');
+
+        // Show the form
+        document.getElementById('update-car-form').style.display = 'block';
+    }
+
+    function update_car() {
+        var id = document.getElementById('update-id').value;
+        var carName = document.getElementById('update-carName').value;
+        var carDesc = document.getElementById('update-carDesc').value;
+        var carPrice = document.getElementById('update-carPrice').value;
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'update_car' %}",
+            data: {
+                id: id,
+                carName: carName,
+                carDesc: carDesc,
+                carPrice: carPrice,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                if (response.status === 'success') {
+                    // Update the table row with new values
+                    document.getElementById(`carName-${id}`).innerText = carName;
+                    document.getElementById(`carDesc-${id}`).innerText = carDesc;
+                    document.getElementById(`carPrice-${id}`).innerText = 'Rs ' + carPrice + '/-';
+                    
+                    // Hide the form
+                    document.getElementById('update-car-form').style.display = 'none';
+                } else {
+                    alert('Error updating car');
+                }
+            },
+            error: function () {
+                alert('An error occurred');
+            }
+        });
+    }
+
+    function delete_car(id) {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'delete_car' %}",
+            data: {
+                "id": id,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                if (response.status === 'success') {
+                    document.getElementById(`row-${id}`).remove();
+                } else {
+                    alert('Error deleting car');
+                }
+            },
+            error: function () {
+                alert('An error occurred');
+            }
+        });
+    }
+</script>
+
+{% endblock content %}

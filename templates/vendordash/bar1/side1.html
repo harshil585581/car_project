@@ -1,0 +1,15 @@
+{% load static %}
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2> Hi, {{ currentuser }}</h2>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="/vendorDash"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="/vendorDash/managecar_view1"><i class="fas fa-car"></i> Manage Cars</a></li>  
+        <!-- or users_table up -->
+        <li><a href="/vendorDash/add_car" id="settings-link"><i class="fas fa-cogs"></i> Add Cars </a></li>
+        <li><a href="/vendorDash/logout2" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</div>
+
+

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'buy_car',
     'explore_cars',
     'adminDash',
+    'vendorDash'
 ]
 
 MIDDLEWARE = [

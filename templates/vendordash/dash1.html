@@ -11,25 +11,14 @@
     
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
-    
-    <title>Customer Dashboard</title>
-    <link rel="stylesheet" href="{% static 'css/cprofile.css' %}"> <!-- Update the path as needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static '/css/dash.css' %}">
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2> Hi, {{ currentuser }}</h2>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="/home/cprofile"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="/explore_cars/view_cart"><i class="fas fa-car"></i> Saved Cars</a></li>  
-            <li><a href="/home/cdocument" id="settings-link"><i class="fas fa-cogs"></i> Upload Documents</a></li>
-            <li><a href=""><i class="fas fa-users"></i> Support</a></li>
-            <li><a href="/home"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li><a href="/home/logout_view"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
-    </div>
+    {% include 'vendordash/bar1/side1.html' %}    
 
     <div class="main-content">
         <header class="header">
@@ -57,10 +46,15 @@
                     <p>{{ password }}</p>
                 </div>
             </div>
-        </section>
+        </section>     
+
 
         {% endblock content %}
-    </div>
 
+        
+    </div>
+<script>
+    
+</script>
 </body>
 </html>
