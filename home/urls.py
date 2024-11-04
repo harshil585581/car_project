@@ -11,4 +11,8 @@ urlpatterns = [
 
     path('logout_view', views.logout_view, name='logout_view'),
 
+    path('send_reset_link', views.send_reset_link.as_view(), name='send_reset_link'),
+
+    path('subscribee', views.subscribee, name='subscribee'),  
+    
 ]

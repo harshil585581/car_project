@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
     <title>Your Cart - Fury Cars</title>
     <style>
@@ -45,6 +46,31 @@
             font-weight: 600;
         }
     </style>
+    <script>
+        function deleteItem(carId) {
+    if (confirm("Are you sure you want to remove this item?")) {
+        $.ajax({
+            url: "{% url 'remove_item' %}", // Ensure this URL is correct
+            type: "POST",
+            data: {
+                'car_id': carId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Remove the deleted item row from the table
+                    document.getElementById('row-' + carId).remove();
+                } else {
+                    alert(response.message || 'An error occurred while deleting the item.');
+                }
+            },
+            error: function() {
+                alert('An error occurred. Please try again.');
+            }
+        });
+    }
+}
+    </script>
 </head>
 <body>
     <h2>Your Cart</h2>
@@ -56,11 +82,12 @@
                     <th>Car Name</th>
                     <th>Total Price</th>
                     <th>Enquire</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in item_prices %}
-                <tr>
+                <tr id="row-{{ item.car.id }}">
                     <td>{{ item.car.carName }}</td>
                     <td>{{ item.total_price }}</td>
                     <td>
@@ -70,11 +97,12 @@
                             <button type="submit">Enquire</button>
                         </form>
                     </td>
+                    <td><button onclick="deleteItem('{{ item.car.id }}')">Remove</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <h3 class="total-price">Total Cart Price: {{ total_price }}</h3>
+        <!-- <h3 class="total-price">Total Cart Price: {{ total_price }}</h3> -->
     {% else %}
         <p>Your cart is empty.</p>
     {% endif %}

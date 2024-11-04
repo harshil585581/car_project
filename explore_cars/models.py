@@ -22,8 +22,8 @@ class Enquiry(models.Model):
     enquiry_date = models.DateField(auto_now_add=True)
     user_name = models.CharField(max_length=100)
     user_phone_number = models.CharField(max_length=15)
-    car_name = models.CharField(max_length=100)  # New field to store car name
-    car_price = models.DecimalField(max_digits=10, decimal_places=2)  # New field to store car price
+    car_name = models.CharField(max_length=100)  
+    car_price = models.DecimalField(max_digits=10, decimal_places=2) 
 
     def __str__(self):
         return f"{self.user_name} - {self.car_name} - {self.enquiry_date}"

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ car.carName }} - Details</title>
+    <link rel="stylesheet" href="{% static '/css/car_details.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <a class="logo"> <span>Fury</span>Cars </a>
+    <nav class="navbar">
+        <a href="{% url 'home' %}">home</a>
+        <a href="#vehicles">vehicles</a>
+        <a href="#contact">contact</a>
+    </nav>
+</header>
+
+<section class="car-details-section">
+    <div class="container">
+        <h1>{{ car.carName }}</h1>
+
+        <img src="{{car.carImage.url}}" alt="{{ car.carName }} image" class="car-image">
+
+        <div class="car-specs">
+            <h2>Car Specifications</h2>
+            <ul>
+                <li><strong>Color:</strong> {{ car.carColor }}</li>
+                <li><strong>Seating Capacity:</strong> {{ car.seatingCapacity }} persons</li>
+                <li><strong>Milage:</strong> {{ car.milage }} km/l</li>
+                <li><strong>Fuel Type:</strong> {{ car.fuelType }}</li>
+                <li><strong>Features:</strong> <br> &nbsp;&nbsp;{{ car.features }}</li>
+                <li><strong>Price:</strong> Rs {{ car.carPrice }}/-</li>
+            </ul>
+        </div>
+
+        <!-- <div class="actions">
+            <a href="{% url 'add_to_cart' car.id %}" class="btn">Add to Cart</a>
+        </div> -->
+    </div>
+</section>
+
+</body>
+</html>

@@ -119,13 +119,14 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: left;
     transition: box-shadow 0.3s ease;
+    height: 80vh;
 }
 
 .car-item img {
-    /* margin-top: 10px;
+    margin-top: 1px;
     display: block;
     margin-left: auto;
-    margin-right: auto; */
+    margin-right: auto; 
     height: 40%;
     width: 100%;
 }

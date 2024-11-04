@@ -29,6 +29,7 @@
                 <h2>Register</h2>
                 <div class="form" >
                     <input type="text" id="username" name="username" placeholder="Enter Your Name" required>
+                    <input type="text" id="email" name="Email" placeholder="Enter Your Email" required>
                     <input type="number" id="number" name="number" placeholder="Enter Your Number" required>
                     <label>
                         <select id="role" class="form-input">
@@ -42,7 +43,7 @@
                     <button type="submit" onclick="check()">Register</button>
                 </div>
                 <div class="message">
-                    <p>Have an account? <a href="">Login here</a></p>
+                    <p>Have an account? <a href="{% url 'login_page' %}">Login here</a></p>
                 </div>
             </div>
         </div>
@@ -52,6 +53,7 @@
         function check()
         {
            var name = $('#username').val();
+           var email = $('#email').val();
            var cmob = $('#number').val();
            var role = $('#role').val();
            var age = $('#age').val();
@@ -64,7 +66,7 @@
            $.ajax({
             type: "POST",
             url: "/adminDash/users_tb",
-            data: {"name": name, "cmob": cmob, "role": role, "age": age, "password": password},
+            data: {"name": name, "email":email, "cmob": cmob, "role": role, "age": age, "password": password},
             success: function(data)
             {
                 window.location.replace("/home");

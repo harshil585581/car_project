@@ -20,11 +20,16 @@ class car_view(TemplateView):
 #     return render(request, 'explore_cars/explorecar.html', {'userdata': userdata})
     
 
+def car_details(request, car_id):
+    car = get_object_or_404(car_check, id=car_id)
+    return render(request, 'explore_cars/car_details.html', {'car': car})
+
+
 def add_to_cart(request, car_id):
     if request.method == "POST":
-        user_id = request.user.id  # or get it from session, etc.
+        user_id = request.user.id  
         car = get_object_or_404(car_check, id=car_id)
-
+        
         cart_item, created = Cart.objects.get_or_create(car=car, user_id=user_id)
         if created:
             cart_item.quantity = 1
@@ -41,7 +46,7 @@ def view_cart(request):
     total_price = sum(item.total_price for item in cart_items)
 
     item_prices = [{
-        'car': item.car,  # This includes car details
+        'car': item.car, 
         'quantity': item.quantity,
         'total_price': item.total_price
     } for item in cart_items]
@@ -54,17 +59,15 @@ def view_cart(request):
 
 
 def ex(request):
-    # return HttpResponse("Hello, world. You're at the loans index.")
     return render(request,"explore_cars/cart.html")
 
 
 
 def enquire(request, car_id):
     if request.method == "POST":
-        # Fetch the car from the database based on car_id
+
         car = get_object_or_404(car_check, id=car_id)
-        
-        # Get user data from the session (assuming 'user_data' is stored in the session)
+
         username = request.session.get('user_data')
         current_user = get_object_or_404(reg_check, name=username)
 
@@ -72,7 +75,33 @@ def enquire(request, car_id):
             car1=car,
             user_name=current_user.name,
             user_phone_number=current_user.cmob,
-            car_name=car.carName,  # Save car name
-            car_price=car.carPrice  # Save car price
+            car_name=car.carName, 
+            car_price=car.carPrice 
         )
         return redirect('view_cart')
+    
+
+
+from django.http import JsonResponse
+from .models import Cart 
+
+def remove_item(request):
+    if request.method == 'POST':
+        car_id = request.POST.get('car_id')  
+        
+        try:
+            cart_item = Cart.objects.get(car__id=car_id)
+            user_id = cart_item.user_id 
+
+            cart_item.delete()
+
+            remaining_items = Cart.objects.filter(user_id=user_id)
+            total_price = sum(item.total_price for item in remaining_items)
+            return JsonResponse({'status': 'success', 'total_price': total_price}) 
+        except Cart.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Item not found.'})
+    
+    return JsonResponse({'status': 'error', 'message': 'Invalid request.'})
+
+
+

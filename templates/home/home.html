@@ -140,12 +140,14 @@
 
 <section class="newsletter">
     <h3>Subscribe for latest updates</h3>
-    <p>Subscribe here to get updates about cars,&nbsp;prices.</p>
-    <form action="#">
-        <input type="email" placeholder="Enter your email">
-        <input type="submit" value="Subscribe">
+    <p>Subscribe here to get updates about cars, prices.</p>
+    <form id="subscribeForm">
+        <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+        <button type="button" onclick="subscribe()">Subscribe</button>
     </form>
+    <p id="message"></p> 
 </section>
+
 
 <section class="reviews" id="reviews">
     <h1 class="heading"> Client's <span>review</span> </h1>
@@ -271,6 +273,41 @@
             
            });
     }
+
+    function subscribe() {
+        // Get the email value from the newsletter form
+        const email = document.getElementById('newsletterEmail').value;
+
+        // Check if the email is empty or invalid
+        if (!email) {
+            document.getElementById('message').innerHTML = 'Please enter a valid email address.';
+            return;
+        }
+
+        // Send the email data via AJAX (fetch) to the server
+        fetch('/home/subscribee', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+    },
+    body: JSON.stringify({ 'email': email })
+})
+.then(response => {
+    if (!response.ok) {
+        return response.text().then(text => { throw new Error(text); });
+    }
+    return response.json(); 
+})
+.then(data => {
+    document.getElementById('message').innerHTML = data.message; 
+})
+.catch(error => {
+    console.log('Error:', error);
+    document.getElementById('message').innerHTML = 'Error: ' + error.message;  
+});
+    }
+
 </script>
 
 </body>

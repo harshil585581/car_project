@@ -28,7 +28,7 @@
                 <th>Username</th>
                 <th>Number</th>
                 <th>Age</th>
-                <th>Password</th>
+                <th>Email</th>
                 <th>Role</th>
                 <th>Actions</th>
             </tr>
@@ -39,7 +39,7 @@
                 <td id="name-{{ obj.cmob }}">{{ obj.name }}</td>
                 <td id="cmob-{{ obj.cmob }}">{{ obj.cmob }}</td>
                 <td id="age-{{ obj.cmob }}">{{ obj.age }}</td>
-                <td id="password-{{ obj.cmob }}">{{ obj.password }}</td>
+                <td id="password-{{ obj.cmob }}">{{ obj.email }}</td>
                 <td id="role{{ obj.cmob }}">{{ obj.role }}</td>
                 <td>
                     <button class="btn btn-edit" onclick="edit_user('{{ obj.cmob }}')">Edit</button>

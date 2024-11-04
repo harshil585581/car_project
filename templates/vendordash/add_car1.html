@@ -57,44 +57,84 @@
             <input type="text" id="carPrice" placeholder="Enter car price">
         </div>
         <div class="form-group">
+            <label for="carColor">Car Color:</label>
+            <input type="text" id="carColor" placeholder="Enter car color">
+        </div>
+        <div class="form-group">
+            <label for="seatingCapacity">Car Seating Capacity:</label>
+            <input type="text" id="seatingCapacity" placeholder="Enter seating capacity">
+        </div>
+        <div class="form-group">
+            <label for="milage">Car Mileage:</label>
+            <input type="text" id="milage" placeholder="Enter car mileage">
+        </div>
+        <div class="form-group">
+            <label for="fuelType">Car Fuel Type:</label>
+            <input type="text" id="fuelType" placeholder="Enter fuel type">
+        </div>
+        <div class="form-group">
+            <label for="features">Car Features:</label>
+            <input type="text" id="features" placeholder="Enter features">
+        </div>
+        <div class="form-group">
             <label for="carImage">Car Image:</label>
             <input type="file" id="carImage">
         </div>
         <button class="button" onclick="submitCar()">Submit</button>
     </div>
+
+    <!-- jQuery for handling the AJAX request -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function submitCar() {
+            var carName = $('#carName').val();
+            var carDesc = $('#carDescription').val();
+            var carPrice = $('#carPrice').val();
+            var carColor = $('#carColor').val();
+            var seatingCapacity = $('#seatingCapacity').val();
+            var milage = $('#milage').val();
+            var fuelType = $('#fuelType').val();
+            var features = $('#features').val();
+            var carImage = $('#carImage')[0].files[0]; 
+
+            var formData = new FormData();
+            formData.append('carName', carName);
+            formData.append('carDesc', carDesc);
+            formData.append('carPrice', carPrice);
+            formData.append('carColor', carColor);
+            formData.append('seatingCapacity', seatingCapacity);
+            formData.append('milage', milage);
+            formData.append('fuelType', fuelType);
+            formData.append('features', features);
+            formData.append('carImage', carImage);
+
+            console.log("carName:", carName);
+            console.log("carDescription:", carDesc);
+            console.log("carPrice:", carPrice);
+            console.log("carColor:", carColor);
+            console.log("seatingCapacity:", seatingCapacity);
+            console.log("milage:", milage);
+            console.log("fuelType:", fuelType);
+            console.log("features:", features);
+            console.log("carImage:", carImage);
+
+            $.ajax({
+                type: "POST",
+                url: "/adminDash/car_tb",
+                data: formData,
+                processData: false, 
+                contentType: false, 
+                success: function(data) {
+                    alert("Car details submitted successfully!");
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert("An error occurred: " + error);
+                }
+            });
+        }
+    </script>
 </body>
-
-<script>
-    function submitCar() {
-        var carName = $('#carName').val();
-        var carDesc = $('#carDescription').val();
-        var carPrice = $('#carPrice').val();
-        var carImage = $('#carImage')[0].files[0]; 
-
-        var formData = new FormData();
-        formData.append('carName', carName);
-        formData.append('carDesc', carDesc);
-        formData.append('carPrice', carPrice);
-        formData.append('carImage', carImage); 
-
-        console.log("carName:", carName);
-        console.log("carDescription:", carDesc);
-        console.log("carPrice:", carPrice);
-        console.log("carImage:", carImage);
-
-        $.ajax({
-            type: "POST",
-            url: "/adminDash/car_tb",
-            data: formData,
-            processData: false, 
-            contentType: false, 
-            success: function(data) {
-                location.reload();
-            }
-        });
-    }
-</script>
-
 </html>
-
 {% endblock content %}

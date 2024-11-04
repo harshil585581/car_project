@@ -40,7 +40,7 @@ def users_table(request):
 
 def logout1(request):
     logout(request)
-    return redirect("login_page")
+    return redirect("home")
 
 
 class login_check(APIView):
@@ -60,12 +60,14 @@ class login_check(APIView):
 class users_tb(APIView):
     def post(self, request):
         name = request.POST['name']
+        email = request.POST['email']
         cmob = request.POST['cmob']
         role = request.POST['role']
         age = request.POST['age']
         password = request.POST['password']
         usr = reg_check()
         usr.name = name
+        usr.email = email
         usr.cmob = cmob
         usr.role = role
         usr.age = age
@@ -132,10 +134,22 @@ class car_tb(APIView):
         carName = request.POST['carName']
         carDesc = request.POST['carDesc']
         carPrice = request.POST['carPrice']
+        carColor = request.POST['carColor']
+        seatingCapacity = request.POST['seatingCapacity']
+        milage = request.POST['milage']
+        fuelType = request.POST['fuelType']
+        features = request.POST['features']
+        carImage =  request.FILES['carImage']
         csr = car_check()
         csr.carName = carName
         csr.carDesc = carDesc
         csr.carPrice = carPrice
+        csr.carColor = carColor
+        csr.seatingCapacity = seatingCapacity
+        csr.milage = milage
+        csr.fuelType = fuelType
+        csr.features = features
+        csr.carImage = carImage
         csr.save()
         # print(username)
         # print(email)
@@ -207,8 +221,8 @@ class ContactUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        contact_data = contact_us.objects.all()  # Fetch all contact messages
-        context['contactdata'] = contact_data   # Add to the context
+        contact_data = contact_us.objects.all()  
+        context['contactdata'] = contact_data   
         return context
     
 
